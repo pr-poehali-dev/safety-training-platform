@@ -4,10 +4,45 @@ import Icon from "@/components/ui/icon";
 const NAV_ITEMS = [
   { id: "home", label: "Главная" },
   { id: "courses", label: "Курсы" },
+  { id: "trainingcenter", label: "Учебный центр" },
   { id: "cabinet", label: "Кабинет" },
   { id: "analytics", label: "Аналитика" },
   { id: "users", label: "Пользователи" },
+  { id: "appeals", label: "Обращения" },
+  { id: "partners", label: "Партнёры" },
   { id: "contacts", label: "Контакты" },
+];
+
+const TEACHERS = [
+  { name: "Алексей Громов", title: "Эксперт по промышленной безопасности", exp: "18 лет", courses: 12, rating: 4.9, color: "#00ff87", initials: "АГ" },
+  { name: "Наталья Беляева", title: "Специалист по пожарной безопасности", exp: "11 лет", courses: 8, rating: 4.8, color: "#00d4ff", initials: "НБ" },
+  { name: "Игорь Савченко", title: "Инструктор по первой помощи", exp: "9 лет", courses: 6, rating: 4.7, color: "#ff6b35", initials: "ИС" },
+  { name: "Елена Морозова", title: "Консультант по СУОТ", exp: "14 лет", courses: 10, rating: 5.0, color: "#a78bfa", initials: "ЕМ" },
+];
+
+const SCHEDULE = [
+  { date: "14 апр", time: "10:00", title: "Вводный инструктаж (группа А)", format: "Очно", seats: 8, total: 20, color: "#00ff87" },
+  { date: "15 апр", time: "14:00", title: "Пожарная безопасность", format: "Онлайн", seats: 15, total: 30, color: "#ff6b35" },
+  { date: "17 апр", time: "09:00", title: "Работа на высоте — практика", format: "Очно", seats: 2, total: 12, color: "#00d4ff" },
+  { date: "18 апр", time: "11:00", title: "Электробезопасность II гр.", format: "Онлайн", seats: 22, total: 25, color: "#a78bfa" },
+  { date: "22 апр", time: "13:00", title: "Первая помощь — тренинг", format: "Очно", seats: 5, total: 15, color: "#f472b6" },
+];
+
+const APPEALS = [
+  { id: "ОБР-2025-041", topic: "Запрос документов по СУОТ", author: "Иванов С.П.", dept: "Производство", date: "04.04.2025", status: "new", priority: "high" },
+  { id: "ОБР-2025-040", topic: "Уточнение сроков переаттестации", author: "Петрова М.И.", dept: "Офис", date: "03.04.2025", status: "inwork", priority: "medium" },
+  { id: "ОБР-2025-039", topic: "Нарушение условий труда на складе №2", author: "Козлов Д.В.", dept: "Склад", date: "01.04.2025", status: "inwork", priority: "high" },
+  { id: "ОБР-2025-038", topic: "Запрос инструктажа для новых сотрудников", author: "Смирнова А.К.", dept: "Лаборатория", date: "28.03.2025", status: "done", priority: "low" },
+  { id: "ОБР-2025-037", topic: "Обновление плана эвакуации", author: "Новиков П.А.", dept: "Производство", date: "25.03.2025", status: "done", priority: "medium" },
+];
+
+const PARTNERS = [
+  { name: "РосТехНадзор", desc: "Федеральная служба по экологическому и технологическому надзору", type: "Госорган", projects: 24, color: "#00ff87", icon: "Landmark" },
+  { name: "Академия ОТ", desc: "Ведущий учебный центр по охране труда России", type: "Образование", projects: 18, color: "#00d4ff", icon: "GraduationCap" },
+  { name: "СИЗ Групп", desc: "Поставщик средств индивидуальной защиты", type: "Поставщик", projects: 31, color: "#ff6b35", icon: "HardHat" },
+  { name: "МедПром", desc: "Медицинское обеспечение и профосмотры предприятий", type: "Медицина", projects: 12, color: "#a78bfa", icon: "Stethoscope" },
+  { name: "ЭкоАудит", desc: "Экологический аудит и промышленная безопасность", type: "Аудит", projects: 9, color: "#f472b6", icon: "ClipboardCheck" },
+  { name: "ПожТех", desc: "Системы пожарной безопасности и оборудование", type: "Поставщик", projects: 16, color: "#fbbf24", icon: "Flame" },
 ];
 
 const COURSES = [
@@ -654,6 +689,308 @@ export default function Index() {
             </div>
           </section>
         )}
+
+        {/* ========== TRAINING CENTER ========== */}
+        {activeSection === "trainingcenter" && (
+          <section className="max-w-7xl mx-auto px-6 py-12">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
+              <div>
+                <h2 className="font-montserrat text-4xl font-black text-white mb-2">Учебный центр</h2>
+                <p style={{ color: "rgba(255,255,255,0.45)" }}>Расписание, преподаватели, форматы обучения</p>
+              </div>
+              <button className="px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 w-fit" style={{ background: "linear-gradient(135deg, #00ff87, #00d4ff)", color: "#0a0f14" }}>
+                <Icon name="CalendarPlus" size={16} />
+                Записаться
+              </button>
+            </div>
+
+            {/* Форматы */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+              {[
+                { icon: "Monitor", label: "Онлайн", desc: "Дистанционно в любое время", color: "#00ff87" },
+                { icon: "Users", label: "Очно", desc: "В учебном классе центра", color: "#00d4ff" },
+                { icon: "Video", label: "Вебинар", desc: "Прямой эфир с преподавателем", color: "#ff6b35" },
+                { icon: "BookMarked", label: "Самостоятельно", desc: "Материалы для изучения", color: "#a78bfa" },
+              ].map((f, i) => (
+                <div key={i} className="rounded-2xl p-5 text-center transition-all hover:-translate-y-1 cursor-pointer" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ background: `${f.color}12`, border: `1px solid ${f.color}28` }}>
+                    <Icon name={f.icon} size={22} style={{ color: f.color }} />
+                  </div>
+                  <div className="font-montserrat font-bold text-white text-sm mb-1">{f.label}</div>
+                  <div className="text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>{f.desc}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-8 mb-8">
+              {/* Расписание */}
+              <div className="rounded-2xl p-7" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                <h3 className="font-montserrat font-bold text-lg text-white mb-6 flex items-center gap-2">
+                  <Icon name="Calendar" size={18} style={{ color: "#00ff87" }} />
+                  Ближайшие занятия
+                </h3>
+                <div className="space-y-3">
+                  {SCHEDULE.map((s, i) => (
+                    <div key={i} className="flex items-center gap-4 p-4 rounded-xl transition-all hover:bg-white/5 cursor-pointer" style={{ background: "rgba(255,255,255,0.025)", border: "1px solid rgba(255,255,255,0.05)" }}>
+                      <div className="text-center flex-shrink-0 w-12">
+                        <div className="text-xs font-bold" style={{ color: s.color }}>{s.date}</div>
+                        <div className="text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>{s.time}</div>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-medium text-white truncate">{s.title}</div>
+                        <div className="flex items-center gap-2 mt-1">
+                          <span className="text-xs px-2 py-0.5 rounded" style={{ background: `${s.color}12`, color: s.color }}>{s.format}</span>
+                          <span className="text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>Мест: {s.seats}/{s.total}</span>
+                        </div>
+                      </div>
+                      <div className="flex-shrink-0">
+                        <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "rgba(0,255,135,0.08)", border: "1px solid rgba(0,255,135,0.2)" }}>
+                          <Icon name="ArrowRight" size={14} style={{ color: "#00ff87" }} />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Преподаватели */}
+              <div className="rounded-2xl p-7" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                <h3 className="font-montserrat font-bold text-lg text-white mb-6 flex items-center gap-2">
+                  <Icon name="UserCheck" size={18} style={{ color: "#00ff87" }} />
+                  Преподаватели
+                </h3>
+                <div className="space-y-4">
+                  {TEACHERS.map((t, i) => (
+                    <div key={i} className="flex items-center gap-4 p-4 rounded-xl" style={{ background: "rgba(255,255,255,0.025)", border: "1px solid rgba(255,255,255,0.05)" }}>
+                      <div className="w-11 h-11 rounded-full flex items-center justify-center text-sm font-black flex-shrink-0" style={{ background: `linear-gradient(135deg, ${t.color}, ${t.color}80)`, color: "#0a0f14" }}>
+                        {t.initials}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-semibold text-white">{t.name}</div>
+                        <div className="text-xs truncate" style={{ color: "rgba(255,255,255,0.4)" }}>{t.title}</div>
+                      </div>
+                      <div className="text-right flex-shrink-0 space-y-1">
+                        <div className="text-xs font-bold" style={{ color: t.color }}>★ {t.rating}</div>
+                        <div className="text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>{t.courses} курсов</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Stats row */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[
+                { val: "24", label: "Программы обучения", color: "#00ff87" },
+                { val: "4 800+", label: "Выпускников", color: "#00d4ff" },
+                { val: "98%", label: "Сдают с первого раза", color: "#ff6b35" },
+                { val: "15 лет", label: "Работаем на рынке", color: "#a78bfa" },
+              ].map((s, i) => (
+                <div key={i} className="rounded-2xl p-5 text-center" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                  <div className="text-3xl font-montserrat font-black mb-1" style={{ color: s.color }}>{s.val}</div>
+                  <div className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* ========== APPEALS ========== */}
+        {activeSection === "appeals" && (
+          <section className="max-w-7xl mx-auto px-6 py-12">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
+              <div>
+                <h2 className="font-montserrat text-4xl font-black text-white mb-2">Обращения</h2>
+                <p style={{ color: "rgba(255,255,255,0.45)" }}>Заявки, запросы и обратная связь</p>
+              </div>
+              <button className="px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 w-fit" style={{ background: "linear-gradient(135deg, #00ff87, #00d4ff)", color: "#0a0f14" }}>
+                <Icon name="Plus" size={16} />
+                Новое обращение
+              </button>
+            </div>
+
+            {/* Статус-счётчики */}
+            <div className="grid grid-cols-3 gap-4 mb-8">
+              {[
+                { label: "Новые", count: 1, color: "#00ff87", icon: "Inbox" },
+                { label: "В работе", count: 2, color: "#ff6b35", icon: "RefreshCw" },
+                { label: "Закрытые", count: 2, color: "#a78bfa", icon: "CheckCircle" },
+              ].map((s, i) => (
+                <div key={i} className="rounded-2xl p-5 flex items-center gap-4" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${s.color}12`, border: `1px solid ${s.color}28` }}>
+                    <Icon name={s.icon} size={20} style={{ color: s.color }} />
+                  </div>
+                  <div>
+                    <div className="text-2xl font-montserrat font-black" style={{ color: s.color }}>{s.count}</div>
+                    <div className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>{s.label}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Поиск */}
+            <div className="flex gap-3 mb-6">
+              <div className="flex-1 flex items-center gap-3 rounded-xl px-4 py-3" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                <Icon name="Search" size={15} style={{ color: "rgba(255,255,255,0.3)" }} />
+                <input placeholder="Поиск по обращениям..." className="bg-transparent flex-1 text-sm outline-none" style={{ color: "rgba(255,255,255,0.8)" }} />
+              </div>
+              {["Все", "Новые", "В работе", "Закрытые"].map((f) => (
+                <button key={f} className="px-4 py-3 rounded-xl text-sm transition-all hidden sm:block" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)", color: "rgba(255,255,255,0.5)" }}>
+                  {f}
+                </button>
+              ))}
+            </div>
+
+            {/* Список обращений */}
+            <div className="space-y-3 mb-8">
+              {APPEALS.map((a, i) => {
+                const statusMap: Record<string, { label: string; color: string }> = {
+                  new: { label: "Новое", color: "#00ff87" },
+                  inwork: { label: "В работе", color: "#ff6b35" },
+                  done: { label: "Закрыто", color: "#a78bfa" },
+                };
+                const priorityMap: Record<string, { label: string; color: string }> = {
+                  high: { label: "Высокий", color: "#ef4444" },
+                  medium: { label: "Средний", color: "#ff6b35" },
+                  low: { label: "Низкий", color: "#00ff87" },
+                };
+                const st = statusMap[a.status];
+                const pr = priorityMap[a.priority];
+                return (
+                  <div key={i} className="rounded-2xl p-5 transition-all hover:bg-white/5 cursor-pointer" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3 justify-between">
+                      <div className="flex items-start gap-4 flex-1 min-w-0">
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${st.color}12`, border: `1px solid ${st.color}28` }}>
+                          <Icon name="FileText" size={18} style={{ color: st.color }} />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1 flex-wrap">
+                            <span className="text-xs font-mono" style={{ color: "rgba(255,255,255,0.35)" }}>{a.id}</span>
+                            <span className="text-xs px-2 py-0.5 rounded-full font-medium" style={{ background: `${pr.color}15`, color: pr.color }}>{pr.label}</span>
+                          </div>
+                          <div className="font-semibold text-white text-sm mb-1 truncate">{a.topic}</div>
+                          <div className="text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>{a.author} · {a.dept} · {a.date}</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3 flex-shrink-0">
+                        <span className="text-xs px-3 py-1 rounded-full font-medium" style={{ background: `${st.color}12`, color: st.color, border: `1px solid ${st.color}28` }}>
+                          {st.label}
+                        </span>
+                        <button style={{ color: "rgba(255,255,255,0.3)" }}><Icon name="ChevronRight" size={18} /></button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Форма нового обращения */}
+            <div className="rounded-2xl p-7" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(0,255,135,0.15)", boxShadow: "0 0 20px rgba(0,255,135,0.03)" }}>
+              <h3 className="font-montserrat font-bold text-lg text-white mb-5 flex items-center gap-2">
+                <Icon name="PenLine" size={18} style={{ color: "#00ff87" }} />
+                Создать обращение
+              </h3>
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="text-xs mb-2 block" style={{ color: "rgba(255,255,255,0.35)" }}>Тема обращения</label>
+                  <input placeholder="Кратко опишите вопрос" className="w-full rounded-xl px-4 py-3 text-sm outline-none" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.85)" }} />
+                </div>
+                <div>
+                  <label className="text-xs mb-2 block" style={{ color: "rgba(255,255,255,0.35)" }}>Приоритет</label>
+                  <select className="w-full rounded-xl px-4 py-3 text-sm outline-none" style={{ background: "rgba(10,14,20,0.9)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.85)" }}>
+                    <option>Низкий</option>
+                    <option>Средний</option>
+                    <option>Высокий</option>
+                  </select>
+                </div>
+              </div>
+              <div className="mb-4">
+                <label className="text-xs mb-2 block" style={{ color: "rgba(255,255,255,0.35)" }}>Подробное описание</label>
+                <textarea rows={3} placeholder="Опишите ситуацию подробнее..." className="w-full rounded-xl px-4 py-3 text-sm outline-none resize-none" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.85)" }} />
+              </div>
+              <button className="px-8 py-3 rounded-xl font-bold text-sm flex items-center gap-2" style={{ background: "linear-gradient(135deg, #00ff87, #00d4ff)", color: "#0a0f14" }}>
+                <Icon name="Send" size={16} />
+                Отправить обращение
+              </button>
+            </div>
+          </section>
+        )}
+
+        {/* ========== PARTNERS ========== */}
+        {activeSection === "partners" && (
+          <section className="max-w-7xl mx-auto px-6 py-12">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
+              <div>
+                <h2 className="font-montserrat text-4xl font-black text-white mb-2">Партнёры</h2>
+                <p style={{ color: "rgba(255,255,255,0.45)" }}>Экосистема доверенных организаций</p>
+              </div>
+              <button className="px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 w-fit" style={{ background: "linear-gradient(135deg, #00ff87, #00d4ff)", color: "#0a0f14" }}>
+                <Icon name="Handshake" size={16} />
+                Стать партнёром
+              </button>
+            </div>
+
+            {/* Типы партнёров */}
+            <div className="flex flex-wrap gap-2 mb-8">
+              {["Все", "Госорган", "Образование", "Поставщик", "Медицина", "Аудит"].map((f) => (
+                <button key={f} className="px-4 py-2 rounded-xl text-sm transition-all" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.5)" }}>
+                  {f}
+                </button>
+              ))}
+            </div>
+
+            {/* Карточки партнёров */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+              {PARTNERS.map((p, i) => (
+                <div key={i} className="rounded-2xl p-7 group transition-all duration-300 hover:-translate-y-1 cursor-pointer" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                  <div className="flex items-start justify-between mb-5">
+                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-110" style={{ background: `${p.color}12`, border: `1px solid ${p.color}28` }}>
+                      <Icon name={p.icon} size={26} style={{ color: p.color }} />
+                    </div>
+                    <span className="text-xs px-3 py-1 rounded-full font-medium" style={{ background: `${p.color}10`, color: p.color, border: `1px solid ${p.color}25` }}>
+                      {p.type}
+                    </span>
+                  </div>
+                  <h3 className="font-montserrat font-bold text-white text-lg mb-2">{p.name}</h3>
+                  <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.4)" }}>{p.desc}</p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1 text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>
+                      <Icon name="Briefcase" size={13} />
+                      {p.projects} совместных проектов
+                    </div>
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "rgba(0,255,135,0.08)", border: "1px solid rgba(0,255,135,0.2)" }}>
+                      <Icon name="ArrowRight" size={14} style={{ color: "#00ff87" }} />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA стать партнёром */}
+            <div className="rounded-2xl p-10 text-center relative overflow-hidden" style={{ background: "rgba(0,255,135,0.04)", border: "1px solid rgba(0,255,135,0.15)" }}>
+              <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "linear-gradient(rgba(0,255,135,1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,135,1) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
+              <div className="relative">
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5" style={{ background: "rgba(0,255,135,0.1)", border: "1px solid rgba(0,255,135,0.25)" }}>
+                  <Icon name="Handshake" size={28} style={{ color: "#00ff87" }} />
+                </div>
+                <h3 className="font-montserrat font-black text-2xl text-white mb-3">Станьте частью экосистемы</h3>
+                <p className="mb-6 max-w-lg mx-auto" style={{ color: "rgba(255,255,255,0.45)" }}>
+                  Объединяем организации в сфере охраны труда для создания безопасной производственной среды в России
+                </p>
+                <div className="flex flex-wrap gap-4 justify-center">
+                  <button className="px-8 py-3 rounded-xl font-bold text-sm" style={{ background: "linear-gradient(135deg, #00ff87, #00d4ff)", color: "#0a0f14" }}>
+                    Оставить заявку
+                  </button>
+                  <button className="px-8 py-3 rounded-xl font-bold text-sm" style={{ background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.7)", border: "1px solid rgba(255,255,255,0.1)" }}>
+                    Узнать подробнее
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
       </main>
 
       {/* Footer */}
